@@ -51,8 +51,11 @@ func (w *FileWatch) Run() {
 func (w *FileWatch) readChannel(c chan string) {
     for {
         select {
-        case str:= <-c:
-            w.Logging(str)
+        case str, ok := <-c:
+            if ok {
+                w.Logging(str)
+            }
+            
         }
     }
 }
